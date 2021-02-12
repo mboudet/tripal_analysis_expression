@@ -226,7 +226,7 @@ function generate_heatmap_values() {
     // to convert this string into a javascript variable.
     // The eval() function is called in the heatmap.js file.
 
-    $hovertemplate = "<b>Biomaterial: %{x}</b><br><b>Feature: %{y}</b><br>%{text}";
+    $hovertemplate = "<b>Biomaterial</b>: %{x}<br><b>Feature</b>: %{y}<br><b>Expression</b>: %{z}<br>%{text}";
 
     if (!empty($x) and !empty($y) and !empty($x)) {
       $heatmap_data = '[{' . '
