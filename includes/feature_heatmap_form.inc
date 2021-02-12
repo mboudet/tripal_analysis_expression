@@ -188,7 +188,8 @@ function generate_heatmap_values() {
       }
       $fid = reset($expressions[$feature_id])->feature_id;
       $nid = chado_get_nid_from_id('feature', $fid);
-      $y[] = l($feature_id, 'node/'.$nid);
+      //$y[] = l($feature_id, 'node/'.$nid);
+      $y[] = $feature_id;
       $x = array_keys($values);
       $signals = array();
       $descriptions = array();
@@ -226,7 +227,7 @@ function generate_heatmap_values() {
     // to convert this string into a javascript variable.
     // The eval() function is called in the heatmap.js file.
 
-    $hovertemplate = "<b>Biomaterial</b>: %{x}<br><b>Feature</b>: %{y}<br><b>Expression</b>: %{z}<br>%{text}";
+    $hovertemplate = "<b>Biomaterial</b>: %{x}<br><b>Feature</b>: %{y}<br><b>Expression</b>: %{z}<br>%{text}<extra></extra>";
 
     if (!empty($x) and !empty($y) and !empty($x)) {
       $heatmap_data = '[{' . '
