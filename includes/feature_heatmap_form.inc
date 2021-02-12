@@ -194,7 +194,14 @@ function generate_heatmap_values() {
       $descriptions = array();
       foreach ($values as $value) {
         $signals[] = $value['signal'];
-        $descriptions[] = 'Treatment: ' . $value['quantification_name'] . '<br>' . 'Description: ' . $value['description'];
+        $text = "";
+        if (!empty($value['quantification_name'])) {
+          $text .= 'Treatment: ' . $value['quantification_name'] . '<br>'
+        }
+        if (!empty($value['description'])) {
+          $text .= 'Description: ' . $value['description']
+        }
+        $descriptions[] =  $text
       }
       $z[] = $signals;
       $text[] = $descriptions;
@@ -218,12 +225,16 @@ function generate_heatmap_values() {
     // To build this variable, we first create a string, and then use javascripts' eval() function
     // to convert this string into a javascript variable.
     // The eval() function is called in the heatmap.js file.
+
+    $hovertemplate = "<b>Biomaterial: %{x}</b><br><b>Feature: %{y}</b><br>%{text}"
+
     if (!empty($x) and !empty($y) and !empty($x)) {
       $heatmap_data = '[{' . '
                                       x:' . json_encode($x) . ', 
                                       y:' . json_encode($y) . ', 
                                       z:' . json_encode($z) . ', 
                                       text:' . json_encode($text) . ',
+                                      hovertemplate: json_encode($$hovertemplate),
                                       hoverinfo: "all",
                                       type:"heatmap"}]';
     }
