@@ -194,14 +194,14 @@ function generate_heatmap_values() {
       $descriptions = array();
       foreach ($values as $value) {
         $signals[] = $value['signal'];
-        $text = "";
+        $content = "";
         if (!empty($value['quantification_name'])) {
-          $text .= 'Treatment: ' . $value['quantification_name'] . '<br>';
+          $content .= 'Treatment: ' . $value['quantification_name'] . '<br>';
         }
         if (!empty($value['description'])) {
-          $text .= 'Description: ' . $value['description'];
+          $content .= 'Description: ' . $value['description'];
         }
-        $descriptions[] =  $text;
+        $descriptions[] =  $content;
       }
       $z[] = $signals;
       $text[] = $descriptions;
