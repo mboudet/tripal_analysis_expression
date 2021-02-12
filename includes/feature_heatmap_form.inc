@@ -234,7 +234,7 @@ function generate_heatmap_values() {
                                       y:' . json_encode($y) . ', 
                                       z:' . json_encode($z) . ', 
                                       text:' . json_encode($text) . ',
-                                      hovertemplate: json_encode($$hovertemplate),
+                                      hovertemplate:' . json_encode($hovertemplate) . ',
                                       hoverinfo: "all",
                                       type:"heatmap"}]';
     }
