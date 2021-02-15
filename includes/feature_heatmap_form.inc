@@ -173,9 +173,9 @@ function generate_heatmap_values() {
         );
   
         if ($biomaterial_unit){
-          $formated_signal = $feature->signal . " " . $biomaterial_unit->value
+          $formated_signal = $feature->signal . " " . $biomaterial_unit->value;
         } else {
-          $formated_signal = $feature->signal
+          $formated_signal = $feature->signal;
         }
         
         $expression_data[$feature_id][$feature->name] = array(
