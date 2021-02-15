@@ -81,7 +81,7 @@ function generate_heatmap_values() {
 
   $sql_feature_uniquename = "SELECT ER.elementresult_id, ER.signal, F.feature_id, F.uniquename, 
             Q.name AS quantification_name, Q.analysis_id, 
-            B.name, B.biomaterial_id, B.description FROM {chado.elementresult} ER
+            B.name, B.biomaterial_id, B.description, Q.quantification_id FROM {chado.elementresult} ER
            INNER JOIN {chado.element} E ON E.element_id = ER.element_id
            INNER JOIN {chado.feature} F ON F.feature_id = E.feature_id
            INNER JOIN {chado.quantification} Q ON Q.quantification_id = ER.quantification_id
@@ -167,11 +167,23 @@ function generate_heatmap_values() {
           $treatment = '';
         }
 
+        $biomaterial_unit = chado_get_property(
+          array('table' => 'quantification', 'id' => $feature->quantification_id),
+          array('type_name' => 'unit_of_measure', 'cv_name' => 'sep')
+        );
+  
+        if ($biomaterial_unit){
+          $formated_signal = $feature->signal . " " . $biomaterial_unit->value
+        } else {
+          $formated_signal = $feature->signal
+        }
+        
         $expression_data[$feature_id][$feature->name] = array(
           'signal' => (float) $feature->signal,
           'description' => $feature->description,
           'quantification_name' => $treatment,
           'analysis_url' => $analysis_url,
+          'formated_signal' => $formated_signal
         );
       }
     }
@@ -194,12 +206,12 @@ function generate_heatmap_values() {
       $descriptions = array();
       foreach ($values as $biosample => $value) {
         $signals[] = $value['signal'];
-        $content = "<b>Biomaterial</b>: " . $biosample . "<br><b>Feature</b>: " . $feature_id . "<br><b>Expression</b>: " . $value['signal'];
+        $content = "<b>Biomaterial</b>: " . $biosample . "<br><b>Feature</b>: " . $feature_id . "<br><b>Expression</b>: " . $value['formated_signal'];
         if (!empty($value['quantification_name'])) {
-          $content .= '<br>Treatment: ' . $value['quantification_name'];
+          $content .= '<br><b>Treatment</b>: ' . $value['quantification_name'];
         }
         if (!empty($value['description'])) {
-          $content .= '<br>Description: ' . $value['description'];
+          $content .= '<br><b>Description</b>: ' . $value['description'];
         }
         $descriptions[] =  $content;
       }
