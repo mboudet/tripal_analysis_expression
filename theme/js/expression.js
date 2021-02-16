@@ -272,9 +272,9 @@ function expSub(heatMap,maxHeat,minHeat) {
 				div.transition()
 				.duration(200)
 				.style("opacity", .9)
-                                div .html(function() {mrkup = '<b>' + d.name + '</b>: <b>' + d.intensityLabel + '</b>';
+                                div .html(function() {mrkup = '<b>' + d.name + '</b>: <b>' + d.intensityLabel + " "  + d.units + '</b>';
                                         if (d.treatment != '') {
-                                                mrkup += '<br><b>Treatment</b>: ' + d.treatment;      
+                                                mrkup += '<br><b>Treatment</b>: ' + d.treatment;
                                         }
                                         if (d.tissue != '') {
                                                 mrkup += '<br><b>Tissue</b>: ' + d.tissue;
@@ -338,7 +338,7 @@ function expSub(heatMap,maxHeat,minHeat) {
 				.duration(200)
 				.style("opacity", .9)
 				.style("text-align", "left")
-                                div .html(function() {mrkup = '<b>' + d.name + '</b>: <b>' + d.intensityLabel + '</b>';
+                                div .html(function() {mrkup = '<b>' + d.name + '</b>: <b>' + d.intensityLabel + " " + d.units + '</b>';
                                         if (d.treatment != '') {
                                                 mrkup += '<br><b>Treatment</b>: ' + d.treatment;      
                                         }
