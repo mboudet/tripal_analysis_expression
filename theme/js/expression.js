@@ -272,7 +272,7 @@ function expSub(heatMap,maxHeat,minHeat) {
 				div.transition()
 				.duration(200)
 				.style("opacity", .9)
-                                div .html(function() {mrkup = '<b>' + d.name + '</b>: <b>' + d.intensityLabel + " "  + d.units + '</b>';
+                                div .html(function() {mrkup = '<b>' + d.name + '</b>: <b>' + d.formated_signal + '</b>';
                                         if (d.treatment != '') {
                                                 mrkup += '<br><b>Treatment</b>: ' + d.treatment;
                                         }
@@ -338,7 +338,7 @@ function expSub(heatMap,maxHeat,minHeat) {
 				.duration(200)
 				.style("opacity", .9)
 				.style("text-align", "left")
-                                div .html(function() {mrkup = '<b>' + d.name + '</b>: <b>' + d.intensityLabel + " " + d.units + '</b>';
+                                div .html(function() {mrkup = '<b>' + d.name + '</b>: <b>' + d.formated_signal + '</b>';
                                         if (d.treatment != '') {
                                                 mrkup += '<br><b>Treatment</b>: ' + d.treatment;      
                                         }
