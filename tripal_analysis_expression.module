@@ -585,7 +585,31 @@ function tripal_analysis_expression_menu() {
     ),
   );
 
+  // Bipaa template stuff : Actually create a page with the blocks
+
+  $items['heatmap'] = array(
+        'page callback' => 'render_expression_blocks',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+  );
+
+  $items['analysis-expression/heatmap/search'] = array(
+    'title' => '',
+    'access arguments' => ['access content'],
+    'page callback' => 'tripal_analysis_expression_search_features_callback',
+    'type' => MENU_CALLBACK,
+  );  
+
   return $items;
+}
+
+// Callback function for block rendering
+function render_expression_blocks() {
+    $blockObjectInput = block_load('tripal_analysis_expression', 'input_features');
+    $blockObjectView = block_load('tripal_analysis_expression', 'heatmap_features');
+    $block = _block_get_renderable_array(_block_render_blocks(array($blockObjectInput, $blockObjectView)));
+    $output = drupal_render($block);
+    return $output;
 }
 
 /**
